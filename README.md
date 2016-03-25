@@ -14,6 +14,10 @@ Scroll this Readme to each kata. Do the kata in the REPL. Check the answer. Repe
 
 # Katas
 
+---
+
+## Kata \#1
+
 ### How do you load the Sugar plugin?
 
 ```
@@ -167,6 +171,17 @@ g.V().count()
 ```
 
 Info: All the edges will have been removed as well.
+
+---
+
+## Kata \#2
+
+### How do you set variable `graph` and `g` to a new empty graph and `TraversalSource`?
+
+```
+graph = TinkerGraph.open()
+g = graph.traversal(standard())
+```
 
 ### How do you add a new vertex with label of 'person', a name of 'sheldon' and an age of 33?
 
