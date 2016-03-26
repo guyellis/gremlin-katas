@@ -177,20 +177,22 @@ Info: All the edges will have been removed as well.
 
 ## Kata \#2
 
-### How do you set variable `graph` and `g` to a new empty graph and `TraversalSource`?
+CRUD operations specified in parens before each kata.
+
+### Set variable `graph` and `g` to a new empty graph and `TraversalSource`?
 
 ```
 graph = TinkerGraph.open()
 g = graph.traversal(standard())
 ```
 
-### How do you add a new vertex with label of 'person', a name of 'sheldon' and an age of 33?
+### (C) Add a new vertex with label of 'person', a name of 'sheldon' and an age of 33?
 
 ```
 g.addV(label, 'person', 'name', 'sheldon', 'age', 33)
 ```
 
-### How do you find the id of the vertex that was just added?
+### (R) Find the id of the vertex that was just added.
 
 ```
 g.V().id()
@@ -198,13 +200,13 @@ Or
 g.V().next().id()
 ```
 
-### How do you add a new vertex with label of 'person', a name of 'amy' and an age of 31?
+### (C) Add a new vertex with label of 'person', a name of 'amy' and an age of 31.
 
 ```
 g.addV(label, 'person', 'name', 'amy', 'age', 31)
 ```
 
-### Add an edge between `sheldon` and `amy` with a label of dating. (Assign vertices to the variables `sheldon` and `amy`. Assign the edge to the variable `relationship`.)
+### (CR) Add an edge between `sheldon` and `amy` with a label of dating. (Assign vertices to the variables `sheldon` and `amy`. Assign the edge to the variable `relationship`.)
 
 ```
 sheldon = g.V().has('name', 'sheldon').next()
@@ -212,7 +214,7 @@ amy = g.V().has('name', 'amy').next()
 relationship = sheldon.addEdge('dating', amy)
 ```
 
-### Add a `person` vertex with the name `leonard`, an age of `32` and a profession of `Experimental Physicist`. Assign this to variable `leonard`.
+### (C) Add a `person` vertex with the name `leonard`, an age of `32` and a profession of `Experimental Physicist`. Assign this to variable `leonard`.
 
 ```
 leonard = g.addV(label, 'person', 'name', 'leonard', 'age', 32, 'profession', 'Experimental Physicist').next()
@@ -224,7 +226,7 @@ leonard = g.addV(label, 'person', 'name', 'leonard', 'age', 32, 'profession', 'E
 sheldon.property('profession', 'Theoretical Physicist')
 ```
 
-### (C) Create a bidirectional `livesWith` Edge between Sheldon and Leonard.
+### (C) Create a `livesWith` Edge from Leonard to Sheldon.
 
 ```
 leonard.addEdge('livesWith', sheldon)
