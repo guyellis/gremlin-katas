@@ -57,16 +57,17 @@ g.V(1)
 g.V().range(0, 2)
 ```
 
-### How do you find the vertex with the name 'marko'?
-
-```
-g.V().has('name', 'marko')
-```
 ### How do you list all the keys and values for the vertices and edges?
 
 ```
 g.V().valueMap()
 g.E().valueMap()
+```
+
+### How do you find the vertex with the name 'marko'?
+
+```
+g.V().has('name', 'marko')
 ```
 
 ### What values does this vertex have?
@@ -99,7 +100,7 @@ g.V().has('name', 'marko').outE('knows').inV()
 g.V().has('name', 'marko').outE('knows').inV().values('name')
 ```
 
-### How do you shorten the outE('knows').inV() to a single command?
+### How do you shorten the outE('knows').inV() to a single command from the last statement?
 
 ```
 g.V().has('name', 'marko').out('knows').values('name')
@@ -149,7 +150,7 @@ g.V(marko).out('knows').has('age', gt(30)).values('name')
 ### How do you delete the vertex “marko” using the marko variable?
 
 ```
-marko.drop()
+g.V(marko).drop()
 ```
 
 ### How do you confirm that the count of vertices is one less than it was before?
@@ -203,10 +204,28 @@ g.V().next().id()
 g.addV(label, 'person', 'name', 'amy', 'age', 31)
 ```
 
-### How do you add an edge between `sheldon` and `amy` with a label of dating? (Assign vertices to the variables `sheldon` and `amy`. Assign the edge to the variable `relationship`.)
+### Add an edge between `sheldon` and `amy` with a label of dating. (Assign vertices to the variables `sheldon` and `amy`. Assign the edge to the variable `relationship`.)
 
 ```
 sheldon = g.V().has('name', 'sheldon').next()
 amy = g.V().has('name', 'amy').next()
 relationship = sheldon.addEdge('dating', amy)
+```
+
+### Add a `person` vertex with the name `leonard`, an age of `32` and a profession of `Experimental Physicist`. Assign this to variable `leonard`.
+
+```
+leonard = g.addV(label, 'person', 'name', 'leonard', 'age', 32, 'profession', 'Experimental Physicist').next()
+```
+
+### (U) Update Sheldon to be a `Theoretical Physicist`
+
+```
+sheldon.property('profession', 'Theoretical Physicist')
+```
+
+### (C) Create a bidirectional `livesWith` Edge between Sheldon and Leonard.
+
+```
+leonard.addEdge('livesWith', sheldon)
 ```
