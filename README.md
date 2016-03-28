@@ -18,95 +18,97 @@ Scroll this Readme to each kata. Do the kata in the REPL. Check the answer. Repe
 
 ## Kata \#1
 
-### How do you load the Sugar plugin?
+### Load the Sugar plugin.
 
 ```
 SugarLoader.load()
 ```
 
-### How do you set the variable `graph` to an instance of the `Modern` graph and a `TraversalSource` instance of that graph to the variable `g`?
+### Set the variable `graph` to an instance of the `Modern` graph and a `TraversalSource` instance of that graph to the variable `g`.
 
 ```
 graph = TinkerFactory.createModern()
 g = graph.traversal(standard())
 ```
 
-### How do you list the edges and vertices in the graph?
+### List the edges and vertices in the graph.
 
 ```
 g.E()
 g.V()
 ```
 
-### How many edges and vertices are there in this graph?
+### Print the number of edges and vertices in this graph.
 
 ```
 g.E().count()
 g.V().count()
 ```
 
-### How do you find the first vertex?
+### Find the first vertex.
 
 ```
 g.V(1)
+or
+g.V().next()
 ```
 
-### How do you find the first 2 vertices?
+### Find the first 2 vertices.
 
 ```
 g.V().range(0, 2)
 ```
 
-### How do you list all the keys and values for the vertices and edges?
+### List all the keys and values for the vertices and edges.
 
 ```
 g.V().valueMap()
 g.E().valueMap()
 ```
 
-### How do you find the vertex with the name 'marko'?
+### Find the vertex with the name 'marko'.
 
 ```
 g.V().has('name', 'marko')
 ```
 
-### What values does this vertex have?
+### Print the values that this vertex has.
 
 ```
 g.V().has('name', 'marko').values()
 ```
 
-### How do you list the out-going edges of this vertex?
+### List the out-going edges of this vertex.
 
 ```
 g.V().has('name', 'marko').outE()
 ```
 
-### How do you list the out-going edges of this vertex of people that marko knows?
+### List the out-going edges of people that marko knows.
 
 ```
 g.V().has('name', 'marko').outE('knows')
 ```
 
-### How do you list the vertices on the other side of those edges?
+### List the vertices on the other side of those edges.
 
 ```
 g.V().has('name', 'marko').outE('knows').inV()
 ```
 
-### How do you list the names associated with the vertices on the other side of those edges?
+### List the names associated with the vertices on the other side of those edges.
 
 ```
 g.V().has('name', 'marko').outE('knows').inV().values('name')
 ```
 
-### How do you shorten the outE('knows').inV() to a single command from the last statement?
+### Shorten the `outE('knows').inV()` part of the previous statement to a single command.
 
 ```
 g.V().has('name', 'marko').out('knows').values('name')
 ```
 
-### How do you list all the out/in/both edges with a 'knows' label?
+### List all the out/in/both edges with a 'knows' label.
 
 ```
 g.V().outE('knows')
@@ -114,7 +116,7 @@ g.V().inE('knows')
 g.V().bothE('knows')
 ```
 
-### How do you assign the result from `g.V().has('name', 'marko')` to a variable named marko?
+### Assign the result from `g.V().has('name', 'marko')` to a variable named marko.
 
 ```
 marko = g.V().has('name', 'marko').next()
@@ -122,50 +124,50 @@ marko = g.V().has('name', 'marko').next()
 
 Why `next()`? `V()` returns an iterator that will return the first element when `next()` is called.
 
-### How do you find the id/label associated with the vertex (variable) marko?
+### Find the `id/label` associated with the vertex (variable) `marko`.
 
 ```
 g.V(marko).id()
 g.V(marko).label()
 ```
 
-### How do you find who Marko knows that has an age of 32 using the just assigned variable marko?
+### Find who Marko knows that has an age of 32 using the just assigned variable `marko`.
 
 ```
 g.V(marko).out('knows').has('age', 32)
 ```
 
-### How do you find who Marko knows that has an age greater than 30 using the just assigned variable marko?
+### Find who Marko knows that has an age greater than 30 using the just assigned variable `marko`.
 
 ```
 g.V(marko).out('knows').has('age', gt(32))
 ```
 
-### How do you show the names of who Marko knows that has an age greater than 30 using the just assigned variable marko?
+### Show the names of who Marko knows that has an age greater than 30 using the just assigned variable `marko`.
 
 ```
 g.V(marko).out('knows').has('age', gt(30)).values('name')
 ```
 
-### How do you delete the vertex “marko” using the marko variable?
+### Delete the vertex “marko” using the `marko` variable.
 
 ```
 g.V(marko).drop()
 ```
 
-### How do you confirm that the count of vertices is one less than it was before?
+### Confirm that the count of vertices is one less than it was before.
 
 ```
 g.V().count()
 ```
 
-### How do you remove the rest of the vertices?
+### Remove the rest of the vertices.
 
 ```
 g.V().drop()
 ```
 
-### How do you confirm that the count of vertices is now zero?
+### Confirm that the count of vertices is now zero.
 
 ```
 g.V().count()
