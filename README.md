@@ -219,7 +219,8 @@ relationship = sheldon.addEdge('dating', amy)
 ### (C) Add a `person` vertex with the name `leonard`, an age of `32` and a profession of `Experimental Physicist`. Assign this to variable `leonard`.
 
 ```
-leonard = g.addV(label, 'person', 'name', 'leonard', 'age', 32, 'profession', 'Experimental Physicist').next()
+leonard = g.addV(label, 'person', 'name', 'leonard', 'age', 32, 'profession',
+  'Experimental Physicist').next()
 ```
 
 ### (U) Update Sheldon to be a `Theoretical Physicist`
@@ -234,7 +235,7 @@ sheldon.property('profession', 'Theoretical Physicist')
 leonard.addEdge('livesWith', sheldon)
 ```
 
-## Kata \#3
+## Kata \#3 - Movie Recommendations
 
 Movie Recommendations Graph TraversalSource
 
@@ -375,13 +376,16 @@ Notes:
 ### Show the `valueMap` for the first 5 users that rated Toy Story more than 3 stars.
 
 ```
-g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV().range(0,5).valueMap()
+g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV()
+  .range(0,5).valueMap()
 ```
 
 ### Determine which users gave Toy Story more than 3 stars and what other movies did they give more than 3 stars to.
 
 ```
-g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV().outE('rated').filter{it.get().property('stars').value > 3}.inV().range(0,5).values('title')
+g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV()
+  .outE('rated').filter{it.get().property('stars').value > 3}.inV().range(0,5)
+  .values('title')
 ```
 
 Notes
@@ -401,14 +405,19 @@ Does not work:
 
 ```
 Gremlin.defineStep('corated',[Vertex,Pipe], { def stars ->
-_().inE('rated').filter{it.get().property('stars') > stars}.outV().outE('rated').filter{it.get().property('stars') > stars}.inV()})
+_().inE('rated').filter{it.get().property('stars') > stars}.outV()
+  .outE('rated').filter{it.get().property('stars') > stars}.inV()})
 ```
 
 ### Determine the number of results of the previous query's and how many of those results are unique. (2 queries)
 
 ```
-g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV().outE('rated').filter{it.get().property('stars').value > 3}.inV().count()
-g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV().outE('rated').filter{it.get().property('stars').value > 3}.inV().dedup().count()
+g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV()
+  .outE('rated').filter{it.get().property('stars').value > 3}.inV()
+  .count()
+g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV()
+  .outE('rated').filter{it.get().property('stars').value > 3}.inV()
+  .dedup().count()
 ```
 
 Results:
@@ -420,5 +429,21 @@ Results:
 Does not work:
 
 ```
-g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV().outE('rated').filter{it.get().property('stars').value > 3}.inV().values('title').groupCount().range(0,5)
+g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV()
+  .outE('rated').filter{it.get().property('stars').value > 3}.inV()
+  .values('title').groupCount().range(0,5)
 ```
+
+The above katas are incomplete. Need help with syntax.
+
+## Kata \#4 - Northwind SQL 2 Gremlin
+
+Source: [sql2gremlin.com](http://sql2gremlin.com/)
+
+Setup:
+* [Download Northwind DB](http://sql2gremlin.com/assets/northwind.groovy).
+* Start Gremlin with Northwind: `bin/gremlin.sh /tmp/northwind.groovy`
+* `graph = NorthwindFactory.createGraph()`
+* `g = graph.traversal()`
+
+For the katas just use the [sql2gremlin.com](http://sql2gremlin.com/) site and scroll to each T-SQL statement.
