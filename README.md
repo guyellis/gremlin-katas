@@ -24,6 +24,8 @@ Scroll this Readme to each kata. Do the kata in the REPL. Check the answer. Repe
 SugarLoader.load()
 ```
 
+---
+
 ## Kata \#1 - Basic CRUD operations
 
 One or more of the CRUD letters in front of the kata will indicate what is being practiced.
@@ -72,6 +74,18 @@ g.V().range(0, 2)
 ```
 g.V().valueMap()
 g.E().valueMap()
+```
+
+### (R) List all the vertices that have the "people" `label`.
+
+```
+g.V().hasLabel('person')
+```
+
+### (R) Get the vertex with `id` 1.
+
+```
+g.V().hasId(1)
 ```
 
 ### (R) Find the vertex with the name 'marko'.
@@ -157,33 +171,79 @@ g.V(marko).out('knows').has('age', gt(32))
 g.V(marko).out('knows').has('age', gt(30)).values('name')
 ```
 
-
-
-### (D) Delete the vertex “marko” using the `marko` variable.
+### (CR) Check how many vertices there are in the graph. Create a new vertex with the name "john" and an age of 40. (This label will be `person`.) Confirm that there is now one more vertex in the graph.
 
 ```
+g.V().count()
+g.addV(label, 'person', 'name', 'john', 'age', 40)
+g.V().count()
+```
+
+### (CR) Check how many edges there are. Create a new "knows" edge from john to marko. Confirm that there is one more edge.
+
+```
+g.E().count()
+
+// #1 verbose
+g.V().hasId(12).next().addEdge('knows', g.V().hasId(1).next())
+
+// #2 simplifying with variables
+john = g.V().hasId(12).next()
+// or
+john = g.V().has('name', 'john').next()
+john.addEdge('knows', marko)
+
+g.E().count()
+```
+
+Note that your id for John (12) might be different.
+
+### (R) Set the "lop" software vertex to the variable `lop`.
+
+```
+lop = g.V().has('name', 'lop').next()
+```
+
+### (C) Add a "created" edge from vertices john to lop and assign that to the variable `c`.
+
+```
+c = john.addEdge('created', lop)
+```
+
+### (R) List the names of everyone who created software lop.
+
+```
+g.V(lop).in('created').values('name')
+```
+
+### (R) List the `valueMap` for all of the `created` incoming edges to lop.
+
+```
+g.V(lop).inE('created').valueMap()
+```
+
+### (U) Update the new edge with a weight of 0.1
+
+```
+g.V(john).outE('created').property('weight', 0.1)
+```
+
+### (RD) Determine the number of verticies. Delete the vertex "marko" using the `marko` variable. Confirm that there is one less vertex.
+
+```
+g.V().count()
 g.V(marko).drop()
-```
-
-### (R) Confirm that the count of vertices is one less than it was before.
-
-```
 g.V().count()
 ```
 
-### (D) Remove the rest of the vertices.
+### (D) Determine the number of edges. Remove the rest of the vertices. Confirm that there are no vertices or edges.
 
 ```
+g.E().count()
 g.V().drop()
-```
-
-### (R) Confirm that the count of vertices is now zero.
-
-```
 g.V().count()
+g.E().count()
 ```
-
-Info: All the edges will have been removed as well.
 
 ---
 
@@ -447,6 +507,8 @@ g.V(v).inE('rated').filter{it.get().property('stars').value > 3}.outV()
 ```
 
 The above katas are incomplete. Need help with syntax.
+
+---
 
 ## Kata \#4 - Northwind SQL 2 Gremlin
 
