@@ -16,15 +16,17 @@ Scroll this Readme to each kata. Do the kata in the REPL. Check the answer. Repe
 
 ---
 
-## Kata \#1 - Basic CRUD operations
+## Kata \#0 - Gremlin/Groovy REPL commands
 
-One or more of the CRUD letters in front of the kata will indicate what is being practiced.
-
-### Load the Sugar plugin (optional).
+### Load the Sugar plugin.
 
 ```
 SugarLoader.load()
 ```
+
+## Kata \#1 - Basic CRUD operations
+
+One or more of the CRUD letters in front of the kata will indicate what is being practiced.
 
 ### Set the variable `graph` to an instance of the `Modern` graph and a `TraversalSource` instance of that graph to the variable `g`.
 
@@ -32,6 +34,10 @@ SugarLoader.load()
 graph = TinkerFactory.createModern()
 g = graph.traversal(standard())
 ```
+
+The graph that you have just loaded looks like this:
+
+![Modern Graph](https://academy.datastax.com/sites/default/files/tinkerpop-modern.png)
 
 ### (R) List the edges and vertices in the graph.
 
@@ -151,6 +157,8 @@ g.V(marko).out('knows').has('age', gt(32))
 g.V(marko).out('knows').has('age', gt(30)).values('name')
 ```
 
+
+
 ### (D) Delete the vertex “marko” using the `marko` variable.
 
 ```
@@ -183,17 +191,19 @@ Info: All the edges will have been removed as well.
 
 CRUD operations specified in parens before each kata.
 
-### Set variable `graph` and `g` to a new empty graph and `TraversalSource`?
+### Set variable `graph` and `g` to a new empty graph and `TraversalSource`.
 
 ```
 graph = TinkerGraph.open()
 g = graph.traversal(standard())
 ```
 
-### (C) Add a new vertex with label of 'person', a name of 'sheldon' and an age of 33?
+### (C) Add a new vertex with label of 'person', a name of 'sheldon' and an age of 33.
 
 ```
 g.addV(label, 'person', 'name', 'sheldon', 'age', 33)
+or
+graph.addVertex(...)
 ```
 
 ### (R) Find the id of the vertex that was just added.
@@ -210,7 +220,7 @@ g.V().next().id()
 g.addV(label, 'person', 'name', 'amy', 'age', 31)
 ```
 
-### (CR) Add an edge between `sheldon` and `amy` with a label of dating. (Assign vertices to the variables `sheldon` and `amy`. Assign the edge to the variable `relationship`.)
+### (CR) Add an edge from `sheldon` to `amy` with a label of dating. (Assign the shelond/amy vertices to the variables `sheldon` and `amy`. Assign the edge to the variable `relationship`.)
 
 ```
 sheldon = g.V().has('name', 'sheldon').next()
