@@ -76,16 +76,20 @@ g.V().valueMap()
 g.E().valueMap()
 ```
 
-### (R) List all the vertices that have the "people" `label`.
+### (R) List all the vertices that have the "person" `label`.
 
 ```
 g.V().hasLabel('person')
+or
+g.V().has(label, 'person')
 ```
 
 ### (R) Get the vertex with `id` 1.
 
 ```
 g.V().hasId(1)
+or
+g.V().has(id, 1)
 ```
 
 ### (R) Find the vertex with the name 'marko'.
@@ -162,7 +166,7 @@ g.V(marko).out('knows').has('age', 32)
 ### (R) Find who Marko knows that has an age greater than 30 using the just assigned variable `marko`.
 
 ```
-g.V(marko).out('knows').has('age', gt(32))
+g.V(marko).out('knows').has('age', gt(30))
 ```
 
 ### (R) Show the names of who Marko knows that has an age greater than 30 using the just assigned variable `marko`.
@@ -171,7 +175,7 @@ g.V(marko).out('knows').has('age', gt(32))
 g.V(marko).out('knows').has('age', gt(30)).values('name')
 ```
 
-### (CR) Check how many vertices there are in the graph. Create a new vertex with the name "john" and an age of 40. (This label will be `person`.) Confirm that there is now one more vertex in the graph.
+### (CR) Check how many vertices there are in the graph. Create a new `person` vertex with the name "john" and an age of 40. Confirm that there is now one more vertex in the graph.
 
 ```
 g.V().count()
@@ -204,9 +208,10 @@ Note that your id for John (12) might be different.
 lop = g.V().has('name', 'lop').next()
 ```
 
-### (C) Add a "created" edge from vertices john to lop and assign that to the variable `c`.
+### (C) Assign the john vertex to variable `john`. Add a "created" edge from vertices john to lop and assign that to the variable `c`.
 
 ```
+john = g.V().has('name', 'john').next()
 c = john.addEdge('created', lop)
 ```
 
@@ -222,13 +227,13 @@ g.V(lop).in('created').values('name')
 g.V(lop).inE('created').valueMap()
 ```
 
-### (U) Update the new edge with a weight of 0.1
+### (U) Update the `created` edge from `john` to `lop` with a weight of 0.1
 
 ```
 g.V(john).outE('created').property('weight', 0.1)
 ```
 
-### (RD) Determine the number of verticies. Delete the vertex "marko" using the `marko` variable. Confirm that there is one less vertex.
+### (RD) Determine the number of vertices. Delete the vertex "marko" using the `marko` variable. Confirm that there is one less vertex.
 
 ```
 g.V().count()
