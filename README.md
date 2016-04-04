@@ -35,6 +35,8 @@ One or more of the CRUD letters in front of the kata will indicate what is being
 ```
 graph = TinkerFactory.createModern()
 g = graph.traversal(standard())
+or
+g = graph.traversal() // standard() is default
 ```
 
 The graph that you have just loaded looks like this:
@@ -74,6 +76,13 @@ g.V().range(0, 2)
 ```
 g.V().valueMap()
 g.E().valueMap()
+```
+
+### (R) As with the last kata, list all the keys and values for the vertices and edges, and this time also include the `id` and `label`.
+
+```
+g.V().valueMap(true)
+g.E().valueMap(true)
 ```
 
 ### (R) List all the vertices that have the "person" `label`.
